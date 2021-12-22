@@ -12,17 +12,17 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
     #access information from database
-    mars_data = mongo.db.marsData.find_one()
-    print(mars_data)
-    return render_template("index.html", mars = mars_data)
+    mars_data = mongo.db.mars_data.find_one()
+    #print(mars_data)
+    return render_template("index.html", mars=mars_data)
 
 @app.route("/scrape")
 def scrape():
     #reference to database collection
-    marsTable = mongo.db.marsData
+    marsTable = mongo.db.mars_data
 
     #drop table if it exists
-    mongo.db.marsData.drop()
+    mongo.db.mars_data.drop()
 
     #call scrape mars script
     mars_data = scrape_mars.scrape_all()
